@@ -18,6 +18,9 @@ Do use TDD for both challenges and include your tests in the final solution.
 ***How to deliver the solution?***
 Just fork this repo and submit your solution as a pull request.
 
+***Due date*** 
+The last day to submit your solution is ***before Sep. 20, 2015***.
+
 ---
 ## What aspects will we evaluate about your solutions? ##
 Be aware, some assessments are subjective, such as our beliefs about good software engineering practices.
