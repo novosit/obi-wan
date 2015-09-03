@@ -3,23 +3,28 @@
 
 We'll like for you to demonstrate your skills using the following tools:
 
-- JavaScript, HTML5, CSS3
+- JavaScript
+- HTML5, CSS3
 - C# (C Sharp) / F# (F Sharp),
-- Node.js, CouchDB, RabbitMQ
+- Node.js
+- CouchDB, RabbitMQ
 - SQL Server
 - TDD (any xUnit framework)
 
-Here you have three programming challenges, you need to solve one using C# and the other using JavaScript. For the later (the one solved using JavaScript), you will create a plain old HTML+JavaScript+CSS application to, manually, test the solution. To serve that HTML GUI use anything from just the file system to a simple HTTP server.
+Here you have 3 programming challenges. You need to solve at least one using C# and one using JavaScript, which means, your solutions must contain both languages but you still get to solve all 3 of them. For the JS ones, create a file named `run.js` that can be executed from node.js (version 0.12.4+, you can use `--harmony` if you like) to prove your solution.
 
-If you choose to build any of the two programming problems as a HTML application, figure out the UI design.
+If you choose to build any of the two programming problems as a HTML application, figure out the UI design. It it recommended that you build at least one with HTML.
 
-Do use TDD for both challenges and include your tests in the final solution.
+Do use TDD for any 2 challenges and include your tests in the final solution. For the JS ones have the tests run by executing `node test.js`
 
 ***How to deliver the solution?***
-Just fork this repo and submit your solution as a pull request.
+
+Just fork this repo and submit your solution as a pull request from your **own personal github account**.
 
 ***Due date*** 
-The last day to submit your solution is ***before Sep. 20, 2015***.
+
+The last day to submit your solution is *** Sep. 30, 2015 ***.
+
 
 ---
 ## What aspects will we evaluate about your solutions? ##
@@ -33,6 +38,9 @@ Be aware, some assessments are subjective, such as our beliefs about good softwa
   - Loosely coupled components, 
   - High cohesive components,
   - Encapsulation, polymorphism, and inheritance
+  
+  JS solutions can be more flexible about OO principles as long as they are intuitive enough.
+
 - **Code Cleanness:** We love clean code. If you only care about *implementing what was asked*, and do not care a bit about *how it was implemented*, may this is not the place for you to work. 
   - Don't be confused ***we expect your code to work (do what was asked)***, but we will read your source code carefully to see how clean and well organized it is.
 - **Maintainability:** Just to enforce the point, we need people able to produce code that can be read, and changed easily by anyone different from its original author.
@@ -54,7 +62,7 @@ If your code works, and we like it. We will make an appointment for an interview
 ---
 ## Challenge One (under `.\01`): Quine–McCluskey's algorithm ##
 ### Description ###
-You are challenged to implement Quine–McCluskey's algorithm. See: [Quine-MacCluskey @ Wikipedia](http://en.wikipedia.org/wiki/Quine%E2%80%93McCluskey_algorithm "Quine-MacCluskey @ Wikipedia"). You should be able to provide a interface that fulfills the following:
+You are challenged to implement Quine–McCluskey's algorithm. See: [Quine-McCluskey @ Wikipedia](http://en.wikipedia.org/wiki/Quine%E2%80%93McCluskey_algorithm "Quine-McCluskey @ Wikipedia"). You should be able to provide a interface that fulfills the following:
 
 - `solveQuineMcCluskey (expression: string) : string`
 
