@@ -71,28 +71,9 @@ tools = {
     */
     getPrimeImplicantsChart: function(groupOfOnes, stop) {
         var result = {}
-        var diffOfOne = function(first, second) {
-            var dash_result = "";
-            var diffCount = 0;
 
-            for (z = 0; z < first.length; z++) { 
-                if (first[z] != second[z]) {
-                    diffCount += 1;
-                    dash_result += "-";
-                }
-                else {
-                    dash_result += first[z].toString();
-                }
-            }
 
-            if (diffCount != 1) {
-                dash_result = "";
-            }
-
-            return dash_result
-        }
-
-        for (i = 0; i <= Object.keys(groupOfOnes).length; i++) { 
+        for (i = 0; i <= Object.keys(groupOfOnes).length; i++) {
             var currentGroup = groupOfOnes[i];
             if (!currentGroup) {
                 currentGroup = []
@@ -102,8 +83,8 @@ tools = {
                 nextGroup = []
             }
 
-            for (j = 0; j < currentGroup.length; j++) { 
-                for (k = 0; k < nextGroup.length; k++) { 
+            for (j = 0; j < currentGroup.length; j++) {
+                for (k = 0; k < nextGroup.length; k++) {
                     var currentMinterm = currentGroup[j]
                     var nextMinterm = nextGroup[k]
                     if (nextMinterm) {
@@ -123,8 +104,38 @@ tools = {
             }
         }
 
+
+        if (Object.keys(result).length == 0) {
+            var result = groupOfOnes;
+        }
+        else {
+            var result = tools.getPrimeImplicantsChart(result);
+        }
+
         return result
     }
+}
+
+
+var diffOfOne = function(first, second) {
+    var result = "";
+    var diffCount = 0;
+
+    for (z = 0; z < first.length; z++) {
+        if (first[z] != second[z]) {
+            diffCount += 1;
+            result += "-";
+        }
+        else {
+            result += first[z].toString();
+        }
+    }
+
+    if (diffCount != 1) {
+        result = "";
+    }
+
+    return result
 }
 
 module.exports.tools = tools;

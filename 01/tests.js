@@ -5,8 +5,8 @@ var quine_mccluskey = require("./quine_mccluskey");
 describe("Array of integers to formula translator function", function(){
   it("should return formula array, given ordered array", function(){
     // Given
-    var input = [ 0, 1, 2, 3, 5, 7, 8, 10, 14, 15 ]
-    var expected = "A'B'C'D'+A'B'C'D+A'B'CD'+A'B'CD+A'BC'D+A'BCD+AB'C'D'+AB'CD'+ABCD'+ABCD";
+    var input = [ 0, 1, 2 ]
+    var expected = "A'B'C'D'+A'B'C'D+A'B'CD'";
 
     // When
     var result = quine_mccluskey.tools.integersToFormula(input);
@@ -17,8 +17,8 @@ describe("Array of integers to formula translator function", function(){
 
   it("should return formula array, given unordered array", function(){
     // Given
-    var input = [ 0, 1, 2, 3, 5, 8, 7, 10, 14, 15 ]
-    var expected = "A'B'C'D'+A'B'C'D+A'B'CD'+A'B'CD+A'BC'D+A'BCD+AB'C'D'+AB'CD'+ABCD'+ABCD";
+    var input = [ 0, 2, 1 ]
+    var expected = "A'B'C'D'+A'B'C'D+A'B'CD'";
 
     // When
     var result = quine_mccluskey.tools.integersToFormula(input);
@@ -121,8 +121,8 @@ describe("getPrimeImplicantsChart function", function(){
 });
 
 
-describe("minimize function", function(){
-  it("should return structure", function(){
+describe("getPrimeImplicantsChart function", function(){
+  it("should return proper structure", function(){
     // Given
     var groupOfOnes = {
         1: [[4, "0100"], [8, "1000"]],
