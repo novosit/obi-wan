@@ -172,6 +172,45 @@ function testQuineMcCluskey () {
         console.log('*PASS*');
     };
 
+    function getMinimizedFromChartTest() {
+        console.log("-------------");
+        console.log("Test 9");
+        console.log("getMinimizedFromChart should return proper value");
+
+        // Given
+        var chart = {
+            1: [ [[4, 12], "-100"], [[8, 10], "10-0"], [[8, 12], "1-00"] ],
+            2: [ [[10, 11], "101-"] ],
+            3: [ [[11, 15], "1-11"] ]
+        };
+        var expected = "BC'D'+ACD";
+
+        // When
+        var result = quine_mccluskey.tools.getMinimizedFromChart(chart);
+
+        // Then
+        assert.equal(result, expected);
+        console.log('*PASS*');
+    };
+
+    function minimizeTest() {
+        console.log("-------------");
+        console.log("Test 10");
+        console.log("minimize should return proper value");
+
+        // Given
+        var input = "A'BC'D'+AB'C'D'+AB'CD'+AB'CD+ABC'D'+ABCD";
+        var expected = "BC'D'+ACD";
+
+        // When
+        var result = quine_mccluskey.minimize(input);
+
+        // Then
+        assert.equal(result, expected);
+        console.log('*PASS*');
+    };
+
+
     binaryToFormulaTest();
     diffOfOneTest();
     integersToFormulaOrderedTest();
@@ -180,6 +219,8 @@ function testQuineMcCluskey () {
     translateFormulaUnorderedTest();
     groupOfOnesTest();
     getPrimeImplicantsChartTest();
+    getMinimizedFromChartTest();
+    minimizeTest()
 };
 
 testQuineMcCluskey();

@@ -12,12 +12,9 @@ process.stdin.on('data', function (input) {
     done();
   }
 
-  var minterms = quine_mccluskey.tools.translateFormula(input);
-  console.log(minterms)
-  var groupOfOnes = quine_mccluskey.tools.groupOfOnes(minterms);
-  console.log(groupOfOnes)
-  var primeImplicantsChart = quine_mccluskey.tools.getPrimeImplicantsChart(groupOfOnes);
-  console.log(primeImplicantsChart)
+  var minimized = quine_mccluskey.minimize(input);
+  console.log('Minimized formula:')
+  console.log(minimized)
 });
 
 function done() {

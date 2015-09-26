@@ -10,7 +10,9 @@ utils = {
         for (i=0; i < data.length; i++) {
             var not = "";
             if (data[i] == 0) {not = "'"};
-            binaryRepr += valueChart[i] + not;
+            if (data[i] != "-") {
+                binaryRepr += valueChart[i] + not;
+            }
         }
 
         return binaryRepr
@@ -145,10 +147,67 @@ tools = {
         }
 
         return result
+    },
+    getMinimizedFromChart: function(chart) {
+        var count = function (numbers, target) {
+            return numbers.reduce(
+                function(n, value) {return n + (value === target);},
+                0);
+            return 
+        }
+        var result = ""
+
+        // Get unique minterms
+        var mintermList = []
+        for (i = 0; i <= Object.keys(chart).length + 4; i++) {
+            var currentGroup = chart[i]
+            if (!currentGroup) {
+                currentGroup = []
+            }
+
+            for (j = 0; j < currentGroup.length; j++) {
+                mintermList = [].concat(mintermList, currentGroup[j][0])
+            }
+        }
+        mintermList.sort(function(a, b){return a - b});
+        var uniqueMinterms = mintermList.filter(
+                function(item) {return count(mintermList, item) == 1;});
+
+        // Search for binaries of unique minterms
+        var finalBinaries = []
+        for (k = 0; k < uniqueMinterms.length; k++) {
+            for (i = 0; i <= Object.keys(chart).length + 4; i++) {
+                var currentGroup = chart[i]
+                if (!currentGroup) {
+                    currentGroup = []
+                }
+
+                for (j = 0; j < currentGroup.length; j++) {
+                    if (currentGroup[j][0].indexOf(uniqueMinterms[k]) > -1) {
+                        finalBinaries.push(currentGroup[j][1])
+                    }
+                }
+            }
+        }
+
+        // Transfor binaries into formula
+        for (index in finalBinaries) {
+           var binary = finalBinaries[index]
+           var formula = utils.binaryToFormula(binary)
+           result += formula + "+"
+        }
+
+        return result.slice(0, - 1)
     }
 }
 
-
-
 module.exports.tools = tools;
 module.exports.utils = utils;
+
+module.exports.minimize = function(input) {
+    var minterms = tools.translateFormula(input);
+    var groupOfOnes = tools.groupOfOnes(minterms);
+    var primeImplicantsChart = tools.getPrimeImplicantsChart(groupOfOnes);
+    var result = tools.getMinimizedFromChart(primeImplicantsChart);
+    return result
+}
