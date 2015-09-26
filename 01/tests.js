@@ -2,6 +2,33 @@ var assert = require("assert");
 var quine_mccluskey = require("./quine_mccluskey");
 
 
+describe("Utility tests", function(){
+  it("binaryToFormula returns proper value", function(){
+    // Given
+    var input = "1010"
+    var expected = "AB'CD'";
+
+    // When
+    var result = quine_mccluskey.utils.binaryToFormula(input);
+
+    // Then
+    assert.equal(result, expected);
+  });
+
+  it("diffOfOne returns proper value", function(){
+    // Given
+    var firsrInput = "0010"
+    var secondInput = "1010"
+    var expected = "-010";
+
+    // When
+    var result = quine_mccluskey.utils.diffOfOne(firsrInput, secondInput);
+
+    // Then
+    assert.equal(result, expected);
+  });
+});
+
 describe("Array of integers to formula translator function", function(){
   it("should return formula array, given ordered array", function(){
     // Given

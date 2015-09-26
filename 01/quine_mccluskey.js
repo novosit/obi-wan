@@ -1,10 +1,9 @@
-tools = {
+utils = {
     /*
-     * Receive an array of integers and return it's representation
-     * in formula notation.
+     * receive a binary as a string and
+     * return it's formula representation
     */
-    integersToFormula: function(input) {
-      var binaryToFormula = function(data) {
+    binaryToFormula: function(data) {
         var valueChart = {0: "A", 1: "B", 2: "C", 3: "D"};
         var binaryRepr = ""
 
@@ -15,15 +14,48 @@ tools = {
         }
 
         return binaryRepr
-      }
+    },
+    /*
+     * Receive two binaries as a string and
+     * return another binary as a string with the difference marked with a dash (-),
+     *   if the difference between them is exactly one binary digit
+     *   else return empty string.
+    */
+    diffOfOne: function(first, second) {
+        var result = "";
+        var diffCount = 0;
 
+        for (z = 0; z < first.length; z++) {
+            if (first[z] != second[z]) {
+                diffCount += 1;
+                result += "-";
+            }
+            else {
+                result += first[z].toString();
+            }
+        }
+
+        if (diffCount != 1) {
+            result = "";
+        }
+
+        return result
+    }
+}
+
+tools = {
+    /*
+     * Receive an array of integers and return it's representation
+     * in formula notation.
+    */
+    integersToFormula: function(input) {
       var result = ""
       var sortedInput = input.sort(function(a, b){return a - b})
 
       for (index in sortedInput) {
          var binary = "0000" + sortedInput[index].toString(2)
          binary = binary.substr(binary.length - 4)
-         var formula = binaryToFormula(binary)
+         var formula = utils.binaryToFormula(binary)
          result += formula + "+"
       }
 
@@ -88,7 +120,7 @@ tools = {
                     var currentMinterm = currentGroup[j]
                     var nextMinterm = nextGroup[k]
                     if (nextMinterm) {
-                        var newMinterm = diffOfOne(currentMinterm[1], nextMinterm[1])
+                        var newMinterm = utils.diffOfOne(currentMinterm[1], nextMinterm[1])
                         if (newMinterm) {
                             var primeImplicant = [
                                 [].concat(currentMinterm[0], nextMinterm[0]), newMinterm
@@ -117,25 +149,6 @@ tools = {
 }
 
 
-var diffOfOne = function(first, second) {
-    var result = "";
-    var diffCount = 0;
-
-    for (z = 0; z < first.length; z++) {
-        if (first[z] != second[z]) {
-            diffCount += 1;
-            result += "-";
-        }
-        else {
-            result += first[z].toString();
-        }
-    }
-
-    if (diffCount != 1) {
-        result = "";
-    }
-
-    return result
-}
 
 module.exports.tools = tools;
+module.exports.utils = utils;
