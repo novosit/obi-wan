@@ -153,7 +153,7 @@ tools = {
             return numbers.reduce(
                 function(n, value) {return n + (value === target);},
                 0);
-            return 
+            return
         }
         var result = ""
 
