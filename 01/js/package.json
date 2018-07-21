@@ -1,0 +1,16 @@
+{
+  "name": "quine-mccluskey",
+  "version": "1.0.0",
+  "description": "",
+  "main": "BooleanExpression.js",
+  "dependencies": {},
+  "devDependencies": {
+    "mocha": "^2.3.0"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

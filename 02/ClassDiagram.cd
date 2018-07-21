@@ -1,0 +1,128 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
+  <Class Name="WebServiceTest.Document">
+    <Position X="8.25" Y="0.75" Width="2.25" />
+    <AssociationLine Name="Versions" Type="WebServiceTest.Version">
+      <MemberNameLabel ManuallyPlaced="true" ManuallySized="true">
+        <Position X="0.11" Y="0.06" Height="0.182" Width="2.091" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAABAAAAAAgAAAICAAAAAAAAAAAAEAAAAAAAAAABA=</HashCode>
+      <FileName>Document.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Versions" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="WebServiceTest.Version">
+    <Position X="4" Y="0.75" Width="2" />
+    <AssociationLine Name="DataType" Type="WebServiceTest.DataType">
+      <MemberNameLabel ManuallyPlaced="true" ManuallySized="true">
+        <Position X="0.016" Y="-0.232" Height="0.182" Width="0.923" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="Records" Type="WebServiceTest.Record">
+      <MemberNameLabel ManuallyPlaced="true" ManuallySized="true">
+        <Position X="-0.036" Y="0.06" Height="0.182" Width="2.07" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>IAABAAAEAAIoiAAAACAAAAwAAAAAAQACAABAAAAAIAA=</HashCode>
+      <FileName>Version.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="User" />
+      <Property Name="DataType" />
+      <Property Name="Status" />
+      <Property Name="Document" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="Records" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="WebServiceTest.User">
+    <Position X="1.5" Y="0.75" Width="1.75" />
+    <AssociationLine Name="Versions" Type="WebServiceTest.Version">
+      <MemberNameLabel ManuallyPlaced="true" ManuallySized="true">
+        <Position X="-0.692" Y="0.414" Height="0.182" Width="2.07" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAAASAAAAAAAAAAAAEAAAAAAAAAAAA=</HashCode>
+      <FileName>Users.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Versions" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="WebServiceTest.Keyword">
+    <Position X="1.75" Y="4.75" Width="1.5" />
+    <AssociationLine Name="Versions" Type="WebServiceTest.VersionKeyword">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.006" Y="0.31" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAAAAAgAAAAAAAAAAAAAAAAAEAAAAgAAAAAAA=</HashCode>
+      <FileName>Keyword.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Versions" />
+      <Property Name="Records" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="WebServiceTest.Record">
+    <Position X="4.25" Y="4.25" Width="1.5" />
+    <AssociationLine Name="Record" Type="WebServiceTest.Record">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-0.202" Y="0.31" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAEAggAAABAA=</HashCode>
+      <FileName>Record.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Record" />
+      <Property Name="Version" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="WebServiceTest.VersionKeyword">
+    <Position X="1.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAIAEAAAAAAAAA=</HashCode>
+      <FileName>VersionKeyword.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Version" />
+      <Property Name="Keyword" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="WebServiceTest.RecordKeyword">
+    <Position X="1.75" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAQCIAAAAAAAABAA=</HashCode>
+      <FileName>RecordKeyword.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Record" />
+      <Property Name="Keyword" />
+    </ShowAsAssociation>
+  </Class>
+  <Enum Name="WebServiceTest.Status">
+    <Position X="6.75" Y="3.25" Width="1.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAACAAAEAAAAAAAAAAAAAAAABAAAAA=</HashCode>
+      <FileName>Status.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="WebServiceTest.DataType">
+    <Position X="6.75" Y="2" Width="1.25" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAA=</HashCode>
+      <FileName>DataType.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

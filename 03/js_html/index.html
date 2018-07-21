@@ -1,0 +1,288 @@
+<!--
+    Ronald Rey Lovera
+    reyronald@gmail.com
+    October, 2015
+-->
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>Obi-wan 03</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+        <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="css/bootstrap.css">
+
+        <script src="js/vendor/modernizr-2.8.3.min.js"></script>
+
+        <style type="text/css">
+            body {
+                background: #f5f5f5;
+            }
+            table {
+                background: white;
+            }
+            /*
+             * Placeholder dashboard ideas
+             */
+
+            .placeholders {
+              margin-bottom: 30px;
+              text-align: center;
+            }
+            .placeholders h4 {
+              margin-bottom: 0;
+            }
+            .placeholder {
+              margin-bottom: 20px;
+            }
+            .placeholder img {
+              display: inline-block;
+              border-radius: 50%;
+            }
+        </style>
+    
+        <!-- <base href="/"> -->
+
+    </head>
+    <body ng-app="app">
+        <!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+        <!-- Add your site or application content here -->
+
+        <h2 class="page-header text-center">Novosit's Obi-Wan Challenge No. 03 - Ronald Rey</h2>
+
+        <div class="col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 main">
+
+            <nav class="navbar navbar-static-top">
+                <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav nav-tabs nav-justified">
+                        <li class="active"><a href="index.html">Employees</a></li>
+                        <li><a href="reports.html">Reports</a></li>
+                    </ul>
+                </div>
+            </nav>
+
+            <div ui-view id="view-content" ng-controller="EmployeeController as employee">
+                <form class="form-horizontal center-block placeholder">
+                    <div class="input-group">
+                        <span class="input-group-addon"><icon class="glyphicon glyphicon-search"></icon></span>
+                        <input type="text" class="form-control" ng-model="employee.search" placeholder="Search...">
+                    </div>
+                </form>
+
+                <button type="button" class="btn btn-primary placeholder center-block" data-toggle="modal" data-target="#modalWorkEntry" ng-click="employee.selectItem()">
+                    Add Entry
+                </button>
+
+                <table class="table table-stripped table-bordered table-hover .table-condensed">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Full Name</th>
+                            <th>Currency</th>
+                            <th>Worked Hours</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="item in employee.items | filterObject:employee.search">
+                            <td>{{ item.id }}</td>
+                            <td>{{ item.fullName}}</td>
+                            <td>{{ item.currency.name }}</td>
+                            <td>{{ item.workedHours }}</td>
+
+                            <td class="text-center">
+                                <button data-toggle="modal" data-target="#modalWorkEntry" ng-click="employee.selectItem(item)">
+                                    <icon class="glyphicon glyphicon-edit"></icon>
+                                </button>
+                            </td>
+
+                            <td class="text-center">
+                                <button ng-click="employee.deleteItem(item)">
+                                    <icon class="glyphicon glyphicon-remove"></icon>
+                                </button>
+                            </td>
+
+                        </tr>
+                    </tbody>
+                </table>
+
+                <button type="button" class="btn btn-primary placeholder center-block" 
+                data-toggle="modal" data-target="#modalReport" ng-click="employee.getReport()">
+                    View this Report
+                </button>
+
+                <!-- MODAL for `Work Entry` -->
+                <!-- It's called `Work Entry` because I'm using this modal as a template for both the `Add` and `Edit` functionalities -->
+                <div class="modal fade" id="modalWorkEntry" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog modal-md">
+                        <div class="modal-content">
+
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title">Work Entry</h4>
+                            </div>
+                            <div class="modal-body">
+
+                                <form id="formWorkEntry" name="formWorkEntry" class="form-horizontal center-block" ng-submit="employee.workEntry()">
+
+                                    <!-- Id -->     
+                                    <div class="form-group" id="divId" ng-class="{'has-error': formWorkEntry.id.$error.unique}">
+                                        <label for="inputId" id="labelId" class="control-label col-sm-3 text-left">Id</label>
+                                        <div class="col-sm-8" ng-class="{'text-danger': formWorkEntry.id.$error.unique}">
+                                            <input type="text" id-available="id" class="form-control" id="inputId" name="id" placeholder="Id" required ng-model="employee.selected.id" ng-disabled="!employee.isNewEntry">
+                                            <div ng-show="formWorkEntry.id.$error.unique">This Employee Id already exists.</div>
+                                        </div>
+                                    </div>
+
+
+                                    <!-- Full Name -->     
+                                    <div class="form-group " id="divFullName">
+                                        <label for="inputFullName" id="labelFullName" class="control-label col-sm-3 text-left">Full Name</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control" id="inputFullName" name="fullName" placeholder="Full Name" required ng-model="employee.selected.fullName">
+                                        </div>
+                                    </div>
+
+                                  <!-- Currency --> 
+                                  <div class="form-group " id="divCurrency">
+                                    <label for="selectCurrency" id="labelCurrency" class="control-label col-sm-3 text-left">Currency</label>
+                                      <div class="col-sm-8">
+                                        <select class="form-control" name="currency" id="selectCurrency" placeholder="Currency"
+                                            ng-options="option.name for option in employee.CURRENCIES track by option.id"
+                                            ng-model="employee.selected.currency"
+                                        >
+                                        </select>
+                                      </div>
+                                  </div>
+
+                                    <!-- Worked Hours -->     
+                                    <div class="form-group " id="divWorkedHours">
+                                        <label for="inputWorkedHours" id="labelWorkedHours" class="control-label col-sm-3 text-left">Worked Hours</label>
+                                        <div class="col-sm-8">
+                                            <input type="number" min="0" class="form-control" id="inputWorkedHours" name="workedHours" placeholder="Worked Hours" required ng-model="employee.selected.workedHours">
+                                        </div>
+                                    </div>
+
+
+                                  <button type="submit" class="btn btn-default center-block" ng-disabled="formWorkEntry.id.$error.unique">Save</button>
+
+                                  <!-- <div>{{ employee.selected }}</div> -->
+
+                                </form>
+
+
+                            </div>
+                            <div class="modal-footer">
+                                <button id="btnCloseWorkEntryModal" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal-dialog -->
+                </div><!-- /.modal -->        
+
+                <!-- MODAL for `Report` -->
+                <div class="modal fade" id="modalReport" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title">Weekly Payment X-Company</h4>
+                            </div>
+                            <div class="modal-body">
+
+                                <p>
+                                    {{ employee.report.date | date:'yyyy-MM-dd @ h:mm:ss a'}}<br>
+                                    Total: {{ employee.report.total | currency:'DOP$' }}
+                                </p>
+
+                                <p>
+                                    Rates: Base DOP
+                                    <ul>
+                                        <li>To USD {{ employee.report.exchangeRates.USD }}</li>
+                                        <li>To EUR {{ employee.report.exchangeRates.EUR }}</li>
+                                    </ul>
+                                </p>
+
+                                <table class="table table-stripped table-bordered table-hover .table-condensed">
+                                    <thead>
+                                        <tr>
+                                            <th>Entry</th>
+                                            <th>EmpID</th>
+                                            <th>Full Name</th>
+                                            <th>Currency</th>
+                                            <th>Hour Price</th>
+                                            <th>Worked Hours</th>
+                                            <th>Amount</th>
+                                            <th>Base-Amount (DOP)</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="item in employee.report.employees">
+                                            <td>{{ $index + 1 }}</td>
+                                            <td>{{ item.id }}</td>
+                                            <td>{{ item.fullName }}</td>
+                                            <td>{{ item.currency.name }}</td>
+                                            <td>{{ item.hourPrice | currency:item.currency.id+'$' }}</td>
+                                            <td>{{ item.workedHours }}</td>
+                                            <td>{{ item.amount | currency:item.currency.id+'$' }}</td>
+                                            <td>{{ item.baseAmount | currency:'DOP$'}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                                <p>
+                                    {{ employee.report.date | date:'yyyy-MM-dd @ h:mm:ss a'}}<br>
+                                    Total: {{ employee.report.total | currency:'DOP$' }}
+                                    <ul>
+                                        <li>Total USD: {{ employee.report.subtotalUSD | currency  }}</li>
+                                        <li>Total EUR: {{ employee.report.subtotalEUR | currency }}</li>
+                                        <li>Total DOP: {{ employee.report.subtotalDOP | currency }}</li>
+                                    </ul>
+                                </p>
+
+                            </div>
+                            <div class="modal-footer">
+                                <button id="btnSaveReport" type="button" class="btn btn-default" data-dismiss="modal" ng-click="employee.saveReport()">Save Report</button>
+                                <button id="btnCloseReportModal" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal-dialog -->
+                </div><!-- /.modal -->  
+            </div>
+
+        </div>
+
+        <!-- Script Dependencies -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.3.min.js"><\/script>')</script>
+        <script src="js/plugins.js"></script>
+        <script src="js/main.js"></script>
+        <script src="js/bootstrap.js"></script>
+        <script src="js/vendor/underscore.js"></script>
+        <script src="js/vendor/angular.js"></script>
+        <script src="js/vendor/angular-resource.js"></script>
+        <script src="js/vendor/angular-ui-router.min.js"></script>
+
+        <!-- App's Scripts -->
+        <script src="js/app/models/Report.js"></script>
+        <script src="js/app/app.js"></script>
+        <script src="js/app/controllers/EmployeeController.js"></script>
+        <script src="js/app/services/ResourceService.js"></script>
+        <script src="js/app/services/StorageService.js"></script>
+        <script src="js/app/services/ApiService.js"></script>
+        <script src="js/app/services/YahooService.js"></script>
+
+    </body>
+</html>
